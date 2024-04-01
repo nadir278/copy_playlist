@@ -41,7 +41,8 @@ for i in artist_and_song:
     
     compare_name = i['song'].lower()
     print(compare_name)
-    
+    #ffff
+
     print(temp_song[0]['title'])
     playlist_ytmusic_id.append(temp_song[0]['videoId'])
 
