@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Input and Output</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Choose Input and Output platforms</h1>
+        <form action="/choose_input_output" method="post">
+            <label for="input_platform">Select platform to copy playlist from:</label>
+            <select name="copy_from" id="Input" onchange="updateOptions(this.value, 'Output')">
+                <option value="YouTube_Music">YouTube Music</option>
+                <option value="Spotify">Spotify</option>
+            </select>
+            <label for="output_platform">Select platform to copy playlist to:</label>
+            <select name="copy_to" id="Output">
+                <option value="YouTube_Music">YouTube Music</option>
+                <option value="Spotify">Spotify</option>
+            </select>
+            <input type="submit" value="Choose">
+        </form>
+    </div>
+
+    <script>
+        function updateOptions(selectedValue, targetId) {
+            var targetSelect = document.getElementById(targetId);
+            var options = targetSelect.options;
+
+            for (var i = 0; i < options.length; i++) {
+                options[i].disabled = options[i].value === selectedValue;
+            }
+        }
+        // Initial update
+        updateOptions(document.getElementById('Input').value, 'Output');
+    </script>
+</body>
+</html>
