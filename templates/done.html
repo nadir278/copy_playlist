@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert Spotify Playlist to YouTube Music</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <form action="/done" method="post">
+            <h1>{{ string }}</h1><br>
+            <input type="submit" value="copy another playlist">
+        </form>
+    </div>
+</body>
+</html>

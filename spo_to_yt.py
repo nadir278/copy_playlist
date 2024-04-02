@@ -19,10 +19,12 @@ def convert(playlist_link):
 
     auth_manager = SpotifyClientCredentials()
     sp = spotipy.Spotify(auth_manager=auth_manager)
+    print('connected to spotify')
+
 
     playlist = sp.playlist(playlist_link)
     tracks = sp.playlist_items(playlist_link)
-    print('got playlist and songs')
+    print('got playlist and songs from spotify')
 
     #create a list of the songs and their artist's
     artist_and_song = []
@@ -31,6 +33,7 @@ def convert(playlist_link):
         artist_and_song.append({'artist': current_track['artists'][0]['name'], 'song': current_track['name']})
 
     ytmusic = YTMusic("oauth.json")
+    print('connected to youtube music')
 
     #create a list of the youtube music id's
     playlist_ytmusic_id = []
@@ -62,6 +65,6 @@ def convert(playlist_link):
     ytmusic_playlist = ytmusic.create_playlist(playlist['name'], playlist['description'], video_ids=playlist_ytmusic_id)
     if ytmusic_playlist:
         print('Playlist copied successfully')
-        return f"Playlist copied successfully. Playlist ID: {ytmusic_playlist}"
+        return "Playlist copied successfully"
     else:
         return "Failed to create YouTube Music playlist"
