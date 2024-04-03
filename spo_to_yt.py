@@ -8,12 +8,6 @@ def is_english(s):
 
 def convert(playlist_link):
 
-    # spotify user id
-    username = '110cxnzqiawttmjdidq0y2drm?si=9940ed5e69fd475c'
-
-    # token details
-    redirect_uri = 'http://localhost:8888/callback'
-    scope = "user-library-read"
     os.environ["SPOTIPY_CLIENT_ID"] = '39f42fa8c5bf4a69a270a038cafab9c4'
     os.environ["SPOTIPY_CLIENT_SECRET"] = '74050c00f9534761a8bcfd53525d7227'
 
@@ -38,8 +32,9 @@ def convert(playlist_link):
     #create a list of the youtube music id's
     playlist_ytmusic_id = []
     for i in artist_and_song:
+        # *error with limit returning 20 results when asked for 5*
         temp_song = ytmusic.search(f"{i['song']} {i['artist']}", filter='songs', limit=5)
-        temp_vid = ytmusic.search(f"{i['song']} {i['artist']}", filter='songs', limit=5)
+        temp_vid = ytmusic.search(f"{i['song']} {i['artist']}", filter='videos', limit=5)
         
         #if the song is insn't in english add the first result
         if is_english(i['song']):
@@ -62,9 +57,13 @@ def convert(playlist_link):
         else:
             playlist_ytmusic_id.append(temp_song[0]['videoId'])
 
-    ytmusic_playlist = ytmusic.create_playlist(playlist['name'], playlist['description'], video_ids=playlist_ytmusic_id)
+    ytmusic_playlist = ytmusic.create_playlist(playlist['name'],
+                                               playlist['description'],
+                                               video_ids=playlist_ytmusic_id)
+    
     if ytmusic_playlist:
         print('Playlist copied successfully')
         return "Playlist copied successfully"
     else:
+        print('Failed to create YouTube Music playlist')
         return "Failed to create YouTube Music playlist"
