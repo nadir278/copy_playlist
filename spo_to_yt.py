@@ -7,7 +7,6 @@ def is_english(s):
         return all(ord(c) < 128 for c in s)
 
 def convert(playlist_link):
-
     os.environ["SPOTIPY_CLIENT_ID"] = '39f42fa8c5bf4a69a270a038cafab9c4'
     os.environ["SPOTIPY_CLIENT_SECRET"] = '74050c00f9534761a8bcfd53525d7227'
 
